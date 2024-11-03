@@ -1,0 +1,95 @@
+{
+  "Core": {
+    "loadingText": "در حال بارگذاری ..."
+  },
+  "NotFound": {
+    "404": "با عرض پوزش، ما نتوانستیم این صفحه را پیدا کنیم.",
+    "backToHome": "بازگشت به صفحه اصلی"
+  },
+  "Auth": {
+    "login": "ورود",
+    "logout": "خروج",
+    "header": "ورود به سیستم و احراز هویت کاربران",
+    "phoneNumber": "تلفن همراه",
+    "sendCode": "ارسال کد",
+    "verificationCode": "کد تایید",
+    "checkCode": "بررسی کد",
+    "resendCodeText": "ارسال مجدد کد و مدت اعتبار آن",
+    "second": "ثانیه",
+    "resendCode": "ارسال مجدد کد",
+    "message": {
+      "codeSent": "کد تایید ارسال شد",
+      "receivedCode": "شما به تازگی کد تایید دریافت کرده اید",
+      "WrongCode": "کد تایید اشتباه است"
+    },
+    "adminDashboard": "داشبورد مدیریت",
+    "mainPage": "صفحه اصلی"
+  },
+  "Locale": {
+    "english": "انگلیسی",
+    "persian": "فارسی"
+  },
+  "Footer": {
+    "footerText1": "© {year} - تمامی حقوق مطالب  برای سامانتل محفوظ است.",
+    "footerText2": "طراحی و توسعه توسط:"
+  },
+  "adminMenu": {
+    "basicItems": "موارد پایه",
+    "admin": "مدیریت",
+    "adminDashboard": "داشبورد مدیریت",
+    "categories": "دسته بندی ها",
+    "apps": "برنامه ها",
+    "store": "فروشگاه",
+    "products": "محصولات",
+    "productsList": "لیست محصولات",
+    "newProduct": "محصول جدید",
+    "settings": "تنظیمات"
+  },
+  "components": {
+    "categories": {
+      "category": "دسته بندی",
+      "addNew": "افزودن",
+      "editCategory": "ویرایش دسته بندی",
+      "addCategory": "افزودن دسته بندی",
+      "categoryUpdated": "دسته بندی به روز رسانی شد",
+      "categoryCreated": "دسته بندی ایجاد شد",
+      "saveChanges": "ذخیره تغییرات",
+      "create": "تولید",
+      "failedToFetchCategories": "مشکل در دریافت اطلاعات دسته بندی است",
+      "categoryNameMustBeUnique": "نام دسته بندی باید یکتا باشد، قبلا مشابه این عنوان استفاده شده است",
+      "somethingWentWrong": "مشکلی پیش آمده است",
+      "hasChild": "امکان پذیر نیست، این دسته بندی احتمالا هنوز فرزندانی دارد",
+      "name": "نام",
+      "categoryName": "عنوان دسته بندی",
+      "type": "نوع",
+      "parentCategory": "دسته مادر",
+      "selectParentCategory": "انتخاب دسته مادر",
+      "cancel": "انصراف",
+      "searchCategories": "جستجو دسته بندی",
+      "blog": "وبلاگ",
+      "product": "محصول",
+      "news": "اخبار",
+      "categoryDeleted": "دسته بندی حدف شد",
+      "update": "بروزرسانی",
+      "delete": "حذف"
+    }
+  },
+  "dataTable": {
+    "search": "جستجو",
+    "noResults": "هیچ نتیجه ای یافت نشد",
+    "previous": "قبلی",
+    "next": "بعدی"
+  },
+  "deleteConfirmationDialog": {
+    "areYouSure": "آیا مطمئن هستید ؟ ",
+    "thisActionCannotBeUndone": "این عملیات قابل بازگشت نیست !",
+    "cancel": "انصراف",
+    "continue": "ادامه بده"
+  },
+  "adminBreadcrumb": {
+    "new": "جدید",
+    "update": "به روز رسانی",
+    "categories": "دسته بندی ها",
+    "adminDashboard": "داشبورد مدیریت"
+  }
+}

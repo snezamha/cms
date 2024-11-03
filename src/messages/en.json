@@ -1,0 +1,95 @@
+{
+  "Core": {
+    "loadingText": "Loading ..."
+  },
+  "NotFound": {
+    "404": "Sorry, we could not find this page.",
+    "backToHome": "Back to home"
+  },
+  "Auth": {
+    "login": "Login",
+    "logout": "Log out",
+    "header": "Login and authenticate users",
+    "phoneNumber": "Phone number",
+    "sendCode": "Send code",
+    "verificationCode": "Verification code",
+    "checkCode": "Check code",
+    "resendCodeText": "Resend the code and its validity period",
+    "second": "Second",
+    "resendCode": "Resend verification code",
+    "message": {
+      "codeSent": "Verification code has been sent",
+      "receivedCode": "You have just received a verification code",
+      "WrongCode": "Verification code is incorrect"
+    },
+    "adminDashboard": "Admin dashboard",
+    "mainPage": "Main page"
+  },
+  "Locale": {
+    "english": "English",
+    "persian": "Persian"
+  },
+  "Footer": {
+    "footerText1": "CopyRight © {year} By Samantel, All rights Reserved.",
+    "footerText2": "Design & Develop by:"
+  },
+  "adminMenu": {
+    "basicItems": "Basic items",
+    "admin": "Admin",
+    "adminDashboard": "Admin dashboard",
+    "categories": "Categories",
+    "apps": "Apps",
+    "store": "Store",
+    "products": "Products",
+    "productsList": "Products list",
+    "newProduct": "New product",
+    "settings": "Settings"
+  },
+  "components": {
+    "categories": {
+      "category": "Category",
+      "addNew": "Add new",
+      "editCategory": "Edit category",
+      "addCategory": "Add category",
+      "categoryUpdated": "Category updated",
+      "categoryCreated": "Category created",
+      "saveChanges": "Save changes",
+      "create": "Add",
+      "failedToFetchCategories": "Faild to fetch categories",
+      "categoryNameMustBeUnique": "Category name must be uniq",
+      "somethingWentWrong": "Something went wrong",
+      "hasChild": "It is Not possible, This category probably still has children",
+      "name": "Name",
+      "categoryName": "Category  name",
+      "type": "Type",
+      "parentCategory": "Parent category",
+      "selectParentCategory": "Select parent category",
+      "cancel": "Cancel",
+      "searchCategories": "Search categories",
+      "blog": "Blog",
+      "product": "Product",
+      "news": "News",
+      "categoryDeleted": "Category deleted",
+      "update": "Update",
+      "delete": "Delete"
+    }
+  },
+  "deleteConfirmationDialog": {
+    "areYouSure": "Are you sure ?",
+    "thisActionCannotBeUndone": "This action cannot be undone !",
+    "cancel": "Cancel",
+    "continue": "Continue"
+  },
+  "dataTable": {
+    "search": "Search",
+    "noResults": "No results found",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "adminBreadcrumb": {
+    "new": "New",
+    "update": "Update",
+    "categories": "Categories",
+    "adminDashboard": "Admin dashboard"
+  }
+}
