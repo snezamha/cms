@@ -1,4 +1,4 @@
-import PageTitle from '@/components/core/admin/breadcrumb';
+import DashboardBreadcrumb from '@/components/core/admin/breadcrumb';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <PageTitle className='mb-6' />
+      <DashboardBreadcrumb />
       {children}
     </>
   );

@@ -7,7 +7,7 @@ const DashboradFooter = async () => {
 
   return (
     <FooterContent>
-      <div className=' md:flex  justify-between text-default-600 hidden'>
+      <div className=' md:flex justify-between text-default-600 hidden'>
         <div className='text-center ltr:md:text-start rtl:md:text-right text-sm'>
           {t('footerText1', { year: new Date().getFullYear() })}
         </div>

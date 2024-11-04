@@ -3,24 +3,24 @@
     "loadingText": "در حال بارگذاری ..."
   },
   "NotFound": {
-    "404": "با عرض پوزش، ما نتوانستیم این صفحه را پیدا کنیم.",
-    "backToHome": "بازگشت به صفحه اصلی"
+    "404": "متاسفیم، نتوانستیم این صفحه را پیدا کنیم.",
+    "backToHome": "بازگشت به خانه"
   },
   "Auth": {
     "login": "ورود",
     "logout": "خروج",
-    "header": "ورود به سیستم و احراز هویت کاربران",
-    "phoneNumber": "تلفن همراه",
+    "header": "ورود و احراز هویت کاربران",
+    "phoneNumber": "شماره تلفن",
     "sendCode": "ارسال کد",
     "verificationCode": "کد تایید",
     "checkCode": "بررسی کد",
     "resendCodeText": "ارسال مجدد کد و مدت اعتبار آن",
     "second": "ثانیه",
-    "resendCode": "ارسال مجدد کد",
+    "resendCode": "ارسال مجدد کد تایید",
     "message": {
       "codeSent": "کد تایید ارسال شد",
-      "receivedCode": "شما به تازگی کد تایید دریافت کرده اید",
-      "WrongCode": "کد تایید اشتباه است"
+      "receivedCode": "شما به تازگی کد تایید دریافت کرده‌اید",
+      "WrongCode": "کد تایید نادرست است"
     },
     "adminDashboard": "داشبورد مدیریت",
     "mainPage": "صفحه اصلی"
@@ -30,15 +30,15 @@
     "persian": "فارسی"
   },
   "Footer": {
-    "footerText1": "© {year} - تمامی حقوق مطالب  برای سامانتل محفوظ است.",
+    "footerText1": "کلیه حقوق محفوظ است © {year} توسط سامانتل.",
     "footerText2": "طراحی و توسعه توسط:"
   },
   "adminMenu": {
-    "basicItems": "موارد پایه",
+    "basicItems": "آیتم‌های پایه",
     "admin": "مدیریت",
     "adminDashboard": "داشبورد مدیریت",
-    "categories": "دسته بندی ها",
-    "apps": "برنامه ها",
+    "categories": "دسته‌بندی‌ها",
+    "apps": "اپلیکیشن‌ها",
     "store": "فروشگاه",
     "products": "محصولات",
     "productsList": "لیست محصولات",
@@ -47,49 +47,75 @@
   },
   "components": {
     "categories": {
-      "category": "دسته بندی",
-      "addNew": "افزودن",
-      "editCategory": "ویرایش دسته بندی",
-      "addCategory": "افزودن دسته بندی",
-      "categoryUpdated": "دسته بندی به روز رسانی شد",
-      "categoryCreated": "دسته بندی ایجاد شد",
+      "category": "دسته‌بندی",
+      "addNew": "افزودن جدید",
+      "editCategory": "ویرایش دسته‌بندی",
+      "addCategory": "افزودن دسته‌بندی",
+      "categoryUpdated": "دسته‌بندی به‌روزرسانی شد",
+      "categoryCreated": "دسته‌بندی ایجاد شد",
       "saveChanges": "ذخیره تغییرات",
-      "create": "تولید",
-      "failedToFetchCategories": "مشکل در دریافت اطلاعات دسته بندی است",
-      "categoryNameMustBeUnique": "نام دسته بندی باید یکتا باشد، قبلا مشابه این عنوان استفاده شده است",
+      "create": "افزودن",
+      "failedToFetchCategories": "بارگیری دسته‌بندی‌ها با مشکل مواجه شد",
+      "categoryNameMustBeUnique": "نام دسته‌بندی باید منحصر به فرد باشد",
       "somethingWentWrong": "مشکلی پیش آمده است",
-      "hasChild": "امکان پذیر نیست، این دسته بندی احتمالا هنوز فرزندانی دارد",
+      "hasChild": "این امکان وجود ندارد، احتمالاً این دسته‌بندی هنوز دارای زیرشاخه است",
       "name": "نام",
-      "categoryName": "عنوان دسته بندی",
+      "categoryName": "نام دسته‌بندی",
       "type": "نوع",
-      "parentCategory": "دسته مادر",
-      "selectParentCategory": "انتخاب دسته مادر",
-      "cancel": "انصراف",
-      "searchCategories": "جستجو دسته بندی",
-      "blog": "وبلاگ",
+      "parentCategory": "دسته‌بندی والد",
+      "selectParentCategory": "انتخاب دسته‌بندی والد",
+      "cancel": "لغو",
+      "searchCategories": "جستجوی دسته‌بندی‌ها",
+      "blog": "بلاگ",
       "product": "محصول",
       "news": "اخبار",
-      "categoryDeleted": "دسته بندی حدف شد",
-      "update": "بروزرسانی",
+      "categoryDeleted": "دسته‌بندی حذف شد",
+      "update": "به‌روزرسانی",
+      "delete": "حذف"
+    },
+    "store": {
+      "products": "محصولات",
+      "addNew": "افزودن جدید",
+      "name": "نام",
+      "description": "توضیحات",
+      "category": "دسته‌بندی",
+      "price": "قیمت",
+      "product": "محصول",
+      "addProduct": "افزودن محصول",
+      "pNPlaceholder": "نام محصول را اینجا وارد کنید.",
+      "pDPlaceholder": "توضیحات محصول را اینجا وارد کنید",
+      "sACategory": "انتخاب یک دسته‌بندی",
+      "images": "تصاویر",
+      "create": "ایجاد",
+      "cancel": "لغو",
+      "productCreated": "محصول ایجاد شد",
+      "productDeleted": "محصول حذف شد",
+      "editProduct": "ویرایش محصول",
+      "productUpdated": "محصول به‌روزرسانی شد",
+      "saveChanges": "ذخیره تغییرات",
+      "update": "به‌روزرسانی",
       "delete": "حذف"
     }
   },
+  "deleteConfirmationDialog": {
+    "areYouSure": "آیا مطمئن هستید؟",
+    "thisActionCannotBeUndone": "این عملیات قابل بازگشت نیست!",
+    "cancel": "لغو",
+    "continue": "ادامه",
+    "deleting": "در حال حذف"
+  },
   "dataTable": {
     "search": "جستجو",
-    "noResults": "هیچ نتیجه ای یافت نشد",
+    "noResults": "نتیجه‌ای یافت نشد",
     "previous": "قبلی",
-    "next": "بعدی"
-  },
-  "deleteConfirmationDialog": {
-    "areYouSure": "آیا مطمئن هستید ؟ ",
-    "thisActionCannotBeUndone": "این عملیات قابل بازگشت نیست !",
-    "cancel": "انصراف",
-    "continue": "ادامه بده"
+    "next": "بعدی",
+    "unknownHeader": "سربرگ ناشناخته"
   },
   "adminBreadcrumb": {
     "new": "جدید",
-    "update": "به روز رسانی",
-    "categories": "دسته بندی ها",
-    "adminDashboard": "داشبورد مدیریت"
+    "update": "به‌روزرسانی",
+    "categories": "دسته‌بندی‌ها",
+    "adminDashboard": "داشبورد مدیریت",
+    "products": "محصولات"
   }
 }

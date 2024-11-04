@@ -16,7 +16,7 @@ const DashboardBreadcrumb = ({ children }: { children?: ReactNode }) => {
   const locations = location.split('/').filter((path) => path);
   const scopedT = useTranslations('adminBreadcrumb');
   return (
-    <div className='flex justify-between gap-3 items-center px-4 md:px-8 mb-1'>
+    <div className='flex px-4 md:px-8 mb-1'>
       <div className='flex-1'>
         <Breadcrumb>
           <BreadcrumbList>

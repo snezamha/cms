@@ -234,15 +234,17 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ initData }) => {
                           placeholder={scopedT('selectParentCategory')}
                         />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent onMouseDown={(e) => e.stopPropagation()}>
                         <div className='px-3 py-1'>
                           <Input
                             placeholder={scopedT('searchCategories')}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={(e) => e.stopPropagation()}
+                            onMouseDown={(e) => e.stopPropagation()}
                           />
                         </div>
-                        {filteredCategories?.map((category) => (
+                        {filteredCategories.map((category) => (
                           <SelectItem key={category.id} value={category.id}>
                             {category.name}
                           </SelectItem>

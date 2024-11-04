@@ -72,24 +72,50 @@
       "categoryDeleted": "Category deleted",
       "update": "Update",
       "delete": "Delete"
+    },
+    "store": {
+      "products": "Products",
+      "addNew": "Add new",
+      "name": "Name",
+      "description": "Description",
+      "category": "Category",
+      "price": "Price",
+      "product": "Product",
+      "addProduct": "Add product",
+      "pNPlaceholder": "Type product name here.",
+      "pDPlaceholder": "Type product description here",
+      "sACategory": "Select a category",
+      "images": "Images",
+      "create": "Create",
+      "cancel": "Cancel",
+      "productCreated": "Product created",
+      "productDeleted": "Product deleted",
+      "editProduct": "Edit product",
+      "productUpdated": "Product updated",
+      "saveChanges": "Save changes",
+      "update": "Update",
+      "delete": "Delete"
     }
   },
   "deleteConfirmationDialog": {
     "areYouSure": "Are you sure ?",
     "thisActionCannotBeUndone": "This action cannot be undone !",
     "cancel": "Cancel",
-    "continue": "Continue"
+    "continue": "Continue",
+    "deleting": "Deleting"
   },
   "dataTable": {
     "search": "Search",
     "noResults": "No results found",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "unknownHeader": "Unknown header"
   },
   "adminBreadcrumb": {
     "new": "New",
     "update": "Update",
     "categories": "Categories",
-    "adminDashboard": "Admin dashboard"
+    "adminDashboard": "Admin dashboard",
+    "products": "Products"
   }
 }

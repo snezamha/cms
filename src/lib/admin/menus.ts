@@ -71,26 +71,26 @@ export function getMenuList(
       menus: [
         {
           id: 'store',
-          href: '/admin/store',
+          href: '/admin',
           label: t('store'),
-          active: pathname.includes('/admin/store'),
+          active: pathname.includes('/admin'),
           icon: 'heroicons-outline:shopping-bag',
           submenus: [
             {
-              href: '/admin/store',
+              href: '/admin/products',
               label: t('products'),
-              active: pathname.includes('/admin/store'),
+              active: pathname.includes('/admin/products'),
               icon: '',
               children: [
                 {
-                  href: '/admin/store/products',
+                  href: '/admin/products',
                   label: t('productsList'),
-                  active: pathname === '/admin/store/products',
+                  active: pathname === '/admin/products',
                 },
                 {
-                  href: '/admin/store/products/new',
+                  href: '/admin/products/new',
                   label: t('newProduct'),
-                  active: pathname === '/admin/store/products/new',
+                  active: pathname === '/admin/products/new',
                 },
               ],
             },

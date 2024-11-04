@@ -32,4 +32,21 @@ model Category {
   updatedAt DateTime   @updatedAt
   parent    Category?  @relation("CategoryToCategory", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   children  Category[] @relation("CategoryToCategory")
+  Product   Product[]
+}
+
+model Product {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  slug        String?
+  description String?   @db.String
+  price       String    @db.String
+  categoryId  String?   @db.ObjectId
+  category    Category? @relation(fields: [categoryId], references: [id])
+  images      Json?
+  status      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([name])
 }

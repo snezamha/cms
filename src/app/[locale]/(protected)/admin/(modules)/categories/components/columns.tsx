@@ -34,8 +34,6 @@ const CellContent = ({ cell }: CellContext<CategoryColumn, unknown>) => {
       return scopedT('product');
     case 'blog':
       return scopedT('blog');
-    case 'news':
-      return scopedT('news');
   }
 };
 
