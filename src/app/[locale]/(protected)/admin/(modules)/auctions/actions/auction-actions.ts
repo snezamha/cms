@@ -20,14 +20,12 @@ export async function fetchProducts() {
   }
 }
 
+// Add Auction
 export const addAuction = actionClient
   .schema(AuctionSchema(t))
   .action(async ({ parsedInput: { title, endAt, status, productIds } }) => {
     try {
-      console.log('Adding auction with product IDs:', productIds);
-
-      // Create the auction
-      await db.auction.create({
+      const auction = await db.auction.create({
         data: {
           title,
           endAt: new Date(endAt),
@@ -36,12 +34,15 @@ export const addAuction = actionClient
         },
       });
 
-      // Update products with auctionEndAt and isInAuction status
+      // Update products to include the new auction ID and set `isInAuction` to true
       await db.product.updateMany({
         where: { id: { in: productIds } },
         data: {
+          auctionIds: {
+            push: auction.id,
+          },
           auctionEndAt: new Date(endAt),
-          isInAuction: status,
+          isInAuction: true,
         },
       });
 
@@ -53,13 +54,26 @@ export const addAuction = actionClient
     }
   });
 
+// Update Auction
 export const updateAuction = actionClient
   .schema(AuctionSchema(t))
   .action(async ({ parsedInput: { id, title, endAt, status, productIds } }) => {
     try {
-      console.log('Updating auction with product IDs:', productIds);
+      const currentAuction = await db.auction.findUnique({
+        where: { id },
+        select: { productIds: true },
+      });
 
-      // Update the auction
+      if (!currentAuction) throw new Error('Auction not found');
+
+      const addedProductIds = productIds.filter(
+        (pid) => !currentAuction.productIds.includes(pid)
+      );
+      const removedProductIds = currentAuction.productIds.filter(
+        (pid) => !productIds.includes(pid)
+      );
+
+      // Update auction details
       await db.auction.update({
         where: { id },
         data: {
@@ -70,14 +84,39 @@ export const updateAuction = actionClient
         },
       });
 
-      // Update products with auctionEndAt and isInAuction status
+      // Add auction ID to new products
       await db.product.updateMany({
-        where: { id: { in: productIds } },
+        where: { id: { in: addedProductIds } },
         data: {
+          auctionIds: {
+            push: id,
+          },
           auctionEndAt: new Date(endAt),
-          isInAuction: status,
+          isInAuction: true,
         },
       });
+
+      // Update removed products by removing auction ID and adjusting `isInAuction`
+      const removedProducts = await db.product.findMany({
+        where: { id: { in: removedProductIds } },
+        select: { id: true, auctionIds: true, auctionEndAt: true },
+      });
+
+      for (const product of removedProducts) {
+        const updatedAuctionIds = product.auctionIds.filter(
+          (auctionId) => auctionId !== id
+        );
+
+        await db.product.update({
+          where: { id: product.id },
+          data: {
+            auctionIds: updatedAuctionIds,
+            isInAuction: updatedAuctionIds.length > 0,
+            auctionEndAt:
+              updatedAuctionIds.length > 0 ? product.auctionEndAt : null,
+          },
+        });
+      }
 
       revalidatePath('/admin/auctions');
       return { success: `${title} has been updated`, error: '' };
@@ -87,6 +126,7 @@ export const updateAuction = actionClient
     }
   });
 
+// Delete Auction
 export const deleteAuction = async ({ id }: { id: string }) => {
   try {
     const auction = await db.auction.findUnique({
@@ -95,14 +135,26 @@ export const deleteAuction = async ({ id }: { id: string }) => {
     });
 
     if (auction) {
-      // Reset isInAuction and auctionEndAt for associated products
-      await db.product.updateMany({
+      const products = await db.product.findMany({
         where: { id: { in: auction.productIds } },
-        data: {
-          isInAuction: false,
-          auctionEndAt: null,
-        },
+        select: { id: true, auctionIds: true, auctionEndAt: true },
       });
+
+      for (const product of products) {
+        const updatedAuctionIds = product.auctionIds.filter(
+          (auctionId) => auctionId !== id
+        );
+
+        await db.product.update({
+          where: { id: product.id },
+          data: {
+            auctionIds: updatedAuctionIds,
+            isInAuction: updatedAuctionIds.length > 0,
+            auctionEndAt:
+              updatedAuctionIds.length > 0 ? product.auctionEndAt : null,
+          },
+        });
+      }
     }
 
     // Delete the auction

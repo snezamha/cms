@@ -47,6 +47,7 @@ model Product {
   countInStock    String
   discountPercent String
   isInAuction     Boolean
+  auctionIds      String[]
   auctionEndAt    DateTime?
   status          Boolean   @default(true)
   createdAt       DateTime  @default(now())
