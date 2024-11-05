@@ -41,7 +41,6 @@ export const addAuction = actionClient
           auctionIds: {
             push: auction.id,
           },
-          auctionEndAt: new Date(endAt),
           isInAuction: true,
         },
       });
@@ -91,7 +90,6 @@ export const updateAuction = actionClient
           auctionIds: {
             push: id,
           },
-          auctionEndAt: new Date(endAt),
           isInAuction: true,
         },
       });
@@ -99,7 +97,7 @@ export const updateAuction = actionClient
       // Update removed products by removing auction ID and adjusting `isInAuction`
       const removedProducts = await db.product.findMany({
         where: { id: { in: removedProductIds } },
-        select: { id: true, auctionIds: true, auctionEndAt: true },
+        select: { id: true, auctionIds: true },
       });
 
       for (const product of removedProducts) {
@@ -112,8 +110,6 @@ export const updateAuction = actionClient
           data: {
             auctionIds: updatedAuctionIds,
             isInAuction: updatedAuctionIds.length > 0,
-            auctionEndAt:
-              updatedAuctionIds.length > 0 ? product.auctionEndAt : null,
           },
         });
       }
@@ -137,7 +133,7 @@ export const deleteAuction = async ({ id }: { id: string }) => {
     if (auction) {
       const products = await db.product.findMany({
         where: { id: { in: auction.productIds } },
-        select: { id: true, auctionIds: true, auctionEndAt: true },
+        select: { id: true, auctionIds: true },
       });
 
       for (const product of products) {
@@ -150,8 +146,6 @@ export const deleteAuction = async ({ id }: { id: string }) => {
           data: {
             auctionIds: updatedAuctionIds,
             isInAuction: updatedAuctionIds.length > 0,
-            auctionEndAt:
-              updatedAuctionIds.length > 0 ? product.auctionEndAt : null,
           },
         });
       }
