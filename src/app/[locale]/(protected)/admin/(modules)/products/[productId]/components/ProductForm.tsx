@@ -18,6 +18,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { Checkbox } from '@/components/ui/checkbox';
+
 import { useAction } from 'next-safe-action/hooks';
 import {
   addProduct,
@@ -38,7 +40,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { formatPrice } from '@/lib/utils';
 
 interface ProductFormProps {
   initData?: Product | null;
@@ -70,24 +71,32 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
     url: string;
   };
 
-  const isImageType = (item: any): item is ImageType => {
+  const isImageType = (item: unknown): item is ImageType => {
     return (
       typeof item === 'object' &&
       item !== null &&
       'url' in item &&
-      typeof item.url === 'string'
+      typeof (item as { url?: unknown }).url === 'string'
     );
   };
-
+  const createProductSchema = productSchema(scopedT);
   const form = useForm<productPayload>({
-    resolver: zodResolver(productSchema),
+    resolver: zodResolver(createProductSchema),
     defaultValues: initData
       ? {
           id: initData.id,
           name: initData.name,
           description: initData.description ?? '',
-          price: parseFloat(String(initData.price)),
+          price: initData.price ? String(initData.price) : '0',
           category: initData.categoryId ?? undefined,
+          countInStock: initData.countInStock
+            ? String(initData.countInStock)
+            : '0',
+          discountPercent: initData.discountPercent
+            ? String(initData.discountPercent)
+            : '',
+          isInAuction: initData.isInAuction ?? false,
+          status: initData.status ?? true,
           images: Array.isArray(initData.images)
             ? initData.images.filter(isImageType).map((image) => ({
                 fileKey: image.fileKey || '',
@@ -104,9 +113,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
             : undefined,
         }
       : {
-          name: '',
-          description: '',
-          price: 1000000,
+          price: '0',
+          countInStock: '0',
+          discountPercent: '',
+          isInAuction: false,
+          status: true,
         },
   });
 
@@ -140,7 +151,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof productSchema>) => {
+  const onSubmit = (values: z.infer<typeof createProductSchema>) => {
     execute(values);
   };
 
@@ -152,13 +163,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
 
     deleteProduct({ id: initData.id })
       .then((result) => {
-        if (result.error) {
-          toast.error(scopedT('hasChild'));
-        } else {
-          toast.success(scopedT('productDeleted'));
-          router.push('/admin/products');
-          router.refresh();
-        }
+        toast.success(scopedT('productDeleted'));
+        router.push('/admin/products');
+        router.refresh();
       })
       .catch((error) => {
         toast.error(error);
@@ -200,7 +207,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
               control={form.control}
               name='name'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className='flex-1 w-full max-w-xl'>
                   <FormLabel>{scopedT('name')}</FormLabel>
                   <FormControl>
                     <Input placeholder={scopedT('pNPlaceholder')} {...field} />
@@ -214,7 +221,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
               control={form.control}
               name='description'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className='flex-1 w-full max-w-xl'>
                   <FormLabel>{scopedT('description')}</FormLabel>
                   <FormControl>
                     <Textarea
@@ -226,14 +233,42 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name='images'
+              render={({ field }) => (
+                <FormItem className='flex-1 w-full max-w-xl'>
+                  <FormLabel>{scopedT('images')}</FormLabel>
+                  <FormControl>
+                    <FileUpload
+                      endpoint='imageUploader'
+                      value={field.value}
+                      onChange={(file) =>
+                        field.value
+                          ? field.onChange([...(field.value || []), ...file])
+                          : field.onChange([...file])
+                      }
+                      onRemove={(url) =>
+                        field.onChange([
+                          ...(field.value || []).filter(
+                            (current) => current.url !== url
+                          ),
+                        ])
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
 
-          <div className='flex flex-col items-start gap-6 sm:flex-row'>
+          <div className='flex flex-col sm:flex-row gap-4 w-full max-w-xl'>
             <FormField
               control={form.control}
               name='category'
               render={({ field }) => (
-                <FormItem className='flex-1 w-full'>
+                <FormItem className='flex-1 w-full sm:max-w-xs'>
                   <FormLabel>{scopedT('category')}</FormLabel>
                   <Select
                     value={field.value ?? undefined}
@@ -265,30 +300,64 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name='price'
               render={({ field }) => (
-                <FormItem className='flex-1 w-full'>
+                <FormItem className='flex-1 w-full sm:max-w-xs'>
                   <FormLabel>{scopedT('price')}</FormLabel>
                   <FormControl>
                     <Input
-                      type='text'
-                      value={
-                        field.value !== undefined
-                          ? formatPrice(field.value)
-                          : ''
-                      }
+                      type='number'
+                      {...field}
                       onChange={(e) => {
-                        const rawValue = e.target.value.replace(/,/g, '');
-                        const parsedValue = parseFloat(rawValue);
-                        field.onChange(
-                          rawValue === '' || isNaN(parsedValue)
-                            ? undefined
-                            : parsedValue
-                        );
+                        const rawValue = e.target.value;
+                        field.onChange(rawValue);
                       }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+
+                  {field.value && (
+                    <div className='mt-1 text-sm text-gray-600'>
+                      {parseFloat(field.value).toLocaleString()}{' '}
+                      {scopedT('rial')}
+                    </div>
+                  )}
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className='flex flex-col sm:flex-row gap-4 w-full max-w-xl'>
+            <FormField
+              control={form.control}
+              name='countInStock'
+              render={({ field }) => (
+                <FormItem className='flex-1 w-full sm:max-w-xs'>
+                  <FormLabel>{scopedT('countInStock')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='number'
+                      placeholder={scopedT('countInStockPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name='discountPercent'
+              render={({ field }) => (
+                <FormItem className='flex-1 w-full sm:max-w-xs'>
+                  <FormLabel>{scopedT('discountPercent')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='number'
+                      placeholder={scopedT('discountPercentPlaceholder')}
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -296,29 +365,51 @@ export const ProductForm: React.FC<ProductFormProps> = ({ initData }) => {
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name='isInAuction'
+            render={({ field }) => (
+              <FormItem className='flex flex-row items-center w-full sm:max-w-xs'>
+                <FormLabel className='flex-1'>
+                  {scopedT('isInAuction')} :
+                </FormLabel>
+                <div
+                  className={`mx-2 text-sm ${
+                    field.value ? 'text-green-600' : 'text-yellow-600'
+                  }`}
+                >
+                  ({field.value ? scopedT('yes') : scopedT('notYet')})
+                </div>
+                <FormControl>
+                  <Checkbox
+                    className='flex-none'
+                    checked={field.value}
+                    disabled
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}
-            name='images'
+            name='status'
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{scopedT('images')}</FormLabel>
+              <FormItem className='flex flex-row items-center w-full sm:max-w-xs'>
+                <FormLabel className='flex-1'>{scopedT('status')}</FormLabel>
+                <div
+                  className={`mx-2 text-sm ${
+                    field.value ? 'text-green-600' : 'text-yellow-600'
+                  }`}
+                >
+                  ({field.value ? scopedT('active') : scopedT('disabled')})
+                </div>
                 <FormControl>
-                  <FileUpload
-                    endpoint='imageUploader'
-                    value={field.value}
-                    onChange={(file) =>
-                      field.value
-                        ? field.onChange([...(field.value || []), ...file])
-                        : field.onChange([...file])
-                    }
-                    onRemove={(url) =>
-                      field.onChange([
-                        ...(field.value || []).filter(
-                          (current) => current.url !== url
-                        ),
-                      ])
-                    }
+                  <Checkbox
+                    className='flex-none'
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
                   />
                 </FormControl>
                 <FormMessage />

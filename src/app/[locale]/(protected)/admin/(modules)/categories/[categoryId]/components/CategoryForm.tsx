@@ -86,9 +86,9 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ initData }) => {
       category.id !== params.categoryId &&
       category.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const form = useForm<z.infer<typeof CategorySchema>>({
-    resolver: zodResolver(CategorySchema),
+  const createCategorySchema = CategorySchema(scopedT);
+  const form = useForm<z.infer<typeof createCategorySchema>>({
+    resolver: zodResolver(createCategorySchema),
     defaultValues: initData
       ? {
           id: initData.id,
@@ -115,7 +115,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ initData }) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof CategorySchema>) => {
+  const onSubmit = (values: z.infer<typeof createCategorySchema>) => {
     execute(values);
   };
 

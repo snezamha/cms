@@ -11,13 +11,13 @@ import {
 } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Pencil, Trash2 } from 'lucide-react';
-import { deleteProduct } from '../actions/product-actions';
-import { ProductColumn } from './columns';
+import { deleteAuction } from '../actions/auction-actions';
+import { AuctionColumn } from './columns';
 import DeleteConfirmationDialog from '@/components/core/admin/delete-confirmation-dialog';
 import { useTranslations } from 'next-intl';
 
 interface CellActionProps {
-  data: ProductColumn;
+  data: AuctionColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -25,26 +25,27 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const scopedT = useTranslations('components.store');
+  const scopedT = useTranslations('components.auctions');
 
   const onDelete = () => {
     setLoading(true);
-    deleteProduct({ id: data.id })
+    deleteAuction({ id: data.id })
       .then((result) => {
         if (result.error) {
+          toast.error(scopedT('hasError'));
           setLoading(false);
           setOpen(false);
           router.refresh();
         } else {
-          toast.success(scopedT('productDeleted'));
+          toast.success(scopedT('auctionDeleted'));
           setLoading(false);
           setOpen(false);
-          router.push('/admin/products');
+          router.push('/admin/auctions');
           router.refresh();
         }
       })
       .catch((error) => {
-        toast.error(error);
+        toast.error(error.message || scopedT('deleteFailed'));
         setLoading(false);
         setOpen(false);
         router.refresh();
@@ -66,7 +67,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
               variant='ghost'
               size='icon'
               className='hover:bg-secondary'
-              onClick={() => router.push(`/admin/products/${data.id}`)}
+              onClick={() => router.push(`/admin/auctions/${data.id}`)}
             >
               <Pencil className='h-4 w-4 text-foreground' />
             </Button>

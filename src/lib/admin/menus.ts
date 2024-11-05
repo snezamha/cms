@@ -95,9 +95,16 @@ export function getMenuList(
               ],
             },
             {
-              href: '/admin/store/settings',
+              href: '/admin/auctions',
+              label: t('auctions'),
+              active: pathname.includes('/admin/auctions'),
+              icon: '',
+              children: [],
+            },
+            {
+              href: '/admin/store-settings',
               label: t('settings'),
-              active: pathname.includes('/admin/store/settings'),
+              active: pathname.includes('/admin/store-settings'),
               icon: '',
               children: [],
             },

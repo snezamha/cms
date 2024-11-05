@@ -3,10 +3,10 @@ import { revalidatePath } from 'next/cache';
 import db from '@/server/db';
 import { productSchema } from '../types/product.schema';
 import { actionClient } from '@/lib/admin/safe-action';
-import { Category } from '@prisma/client';
 import deleteFiles from '../[productId]/components/delete-files';
+const t = (key: string) => key;
 
-export async function fetchCategories(): Promise<Category[]> {
+export async function fetchCategories() {
   try {
     const categories = await db.category.findMany({
       where: {
@@ -23,10 +23,21 @@ export async function fetchCategories(): Promise<Category[]> {
   }
 }
 
+// Add new product
 export const addProduct = actionClient
-  .schema(productSchema)
+  .schema(productSchema(t))
   .action(async ({ parsedInput }) => {
-    const { name, description, price, category, images } = parsedInput;
+    const {
+      name,
+      description,
+      price,
+      category,
+      images,
+      countInStock,
+      discountPercent,
+      isInAuction,
+      status,
+    } = parsedInput;
 
     try {
       await db.product.create({
@@ -36,6 +47,12 @@ export const addProduct = actionClient
           price: price.toString(),
           category: category ? { connect: { id: category } } : undefined,
           images: images || [],
+          countInStock:
+            countInStock !== undefined ? countInStock.toString() : '',
+          discountPercent:
+            discountPercent !== undefined ? discountPercent.toString() : '',
+          isInAuction: isInAuction ?? false,
+          status: status ?? true,
         },
       });
       revalidatePath('/admin/products');
@@ -46,12 +63,24 @@ export const addProduct = actionClient
     }
   });
 
+// Update existing product
 export const updateProduct = actionClient
-  .schema(productSchema)
-  .action(
-    async ({
-      parsedInput: { id, name, description, price, category, images },
-    }) => {
+  .schema(productSchema(t))
+  .action(async ({ parsedInput }) => {
+    const {
+      id,
+      name,
+      description,
+      price,
+      category,
+      images,
+      countInStock,
+      discountPercent,
+      isInAuction,
+      status,
+    } = parsedInput;
+
+    try {
       await db.product.update({
         where: { id },
         data: {
@@ -60,13 +89,23 @@ export const updateProduct = actionClient
           price: price.toString(),
           category: category ? { connect: { id: category } } : undefined,
           images: images || [],
+          countInStock:
+            countInStock !== undefined ? countInStock.toString() : '',
+          discountPercent:
+            discountPercent !== undefined ? discountPercent.toString() : '',
+          isInAuction: isInAuction ?? false,
+          status: status ?? true,
         },
       });
-      revalidatePath('/admin/categories');
+      revalidatePath('/admin/products');
       return { success: `${name} has been updated`, error: '' };
+    } catch (error) {
+      console.error('Error updating product:', error);
+      return { success: '', error: 'Failed to update product' };
     }
-  );
+  });
 
+// Delete product
 export const deleteProduct = async ({ id }: { id: string }) => {
   try {
     const product = await db.product.findUnique({

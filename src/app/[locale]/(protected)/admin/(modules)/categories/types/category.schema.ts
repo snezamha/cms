@@ -1,8 +1,10 @@
 import { z } from 'zod';
 
-export const CategorySchema = z.object({
-  id: z.string().optional(),
-  name: z.string().min(1, 'Category name is required'),
-  type: z.enum(['blog', 'product', 'news']),
-  parentId: z.string().optional().nullable(),
-});
+export const CategorySchema = (t: (key: string) => string) => {
+  return z.object({
+    id: z.string().optional(),
+    name: z.string().min(1, t('categoryNameRequired')),
+    type: z.enum(['blog', 'product']),
+    parentId: z.string().optional().nullable(),
+  });
+};

@@ -43,6 +43,7 @@
     "products": "محصولات",
     "productsList": "لیست محصولات",
     "newProduct": "محصول جدید",
+    "auctions": "حراجی ها",
     "settings": "تنظیمات"
   },
   "components": {
@@ -71,7 +72,8 @@
       "news": "اخبار",
       "categoryDeleted": "دسته‌بندی حذف شد",
       "update": "به‌روزرسانی",
-      "delete": "حذف"
+      "delete": "حذف",
+      "categoryNameRequired": "نام دسته‌بندی ضروری است"
     },
     "store": {
       "products": "محصولات",
@@ -94,7 +96,60 @@
       "productUpdated": "محصول به‌روزرسانی شد",
       "saveChanges": "ذخیره تغییرات",
       "update": "به‌روزرسانی",
-      "delete": "حذف"
+      "delete": "حذف",
+      "searchCategories": "جستجوی دسته‌بندی‌ها",
+      "nameMin": "نام باید حداقل شامل ۳ کاراکتر باشد",
+      "nameMax": "نام باید حداکثر شامل ۵۰ کاراکتر باشد",
+      "descriptionMax": "توضیحات باید حداکثر شامل ۵۰۰ کاراکتر باشد",
+      "priceRequired": "قیمت باید وارد شود",
+      "nameRequired": "عنوان باید وارد شود",
+      "priceMinOrZero": "قیمت باید صفر یا یک عدد مثبت باشد",
+      "countInStock": "موجودی کالا",
+      "countInStockPlaceholder": "تعداد موجودی را وارد کنید",
+      "discountPercent": "درصد تخفیف",
+      "discountPercentPlaceholder": "درصد تخفیف را وارد کنید",
+      "isInAuction": "در حراج است",
+      "status": "وضعیت",
+      "countInStockPositiveOrZero": "موجودی باید صفر یا یک عدد صحیح مثبت باشد",
+      "discountPercentPositive": "درصد تخفیف باید یک عدد مثبت باشد",
+      "countInStockRequired": "موجودی کالا الزامی است",
+      "rial": "ریال",
+      "yes": "بله",
+      "notYet": "هنوز نه",
+      "active": "فعال",
+      "disabled": "غیر فعال"
+    },
+    "auctions": {
+      "auctionTitleRequired": "عنوان حراجی الزامی است",
+      "productIdsRequired": "حداقل یک شناسه محصول الزامی است",
+      "endAtRequired": "تاریخ پایان حراجی الزامی است",
+      "itemName": "نام آیتم",
+      "endDate": "تاریخ پایان",
+      "status": "وضعیت",
+      "auctions": "حراجی‌ها",
+      "auction": "حراجی",
+      "title": "عنوان",
+      "auctionTitle": "عنوان حراجی",
+      "addNew": "افزودن جدید",
+      "addAuction": "افزودن حراجی",
+      "open": "باز",
+      "closed": "بسته شده",
+      "create": "ایجاد",
+      "cancel": "لغو",
+      "createAuction": "ایجاد حراجی",
+      "updateAuction": "بروزرسانی حراجی",
+      "deleteAuction": "حذف حراجی",
+      "auctionCreated": "حراجی با موفقیت ایجاد شد",
+      "auctionUpdated": "حراجی با موفقیت بروزرسانی شد",
+      "auctionDeleted": "حراجی با موفقیت حذف شد",
+      "selectProducts": "انتخاب محصولات",
+      "editAuction": "ویرایش حراجی",
+      "saveChanges": "ذخیره تغییرات",
+      "countOfProducts": "تعداد محصولات",
+      "update": "به‌روزرسانی",
+      "delete": "حذف",
+      "searchProduct": "جستجوی محصول",
+      "noOptionFound": "گزینه ای پیدا نشد"
     }
   },
   "deleteConfirmationDialog": {
@@ -116,6 +171,8 @@
     "update": "به‌روزرسانی",
     "categories": "دسته‌بندی‌ها",
     "adminDashboard": "داشبورد مدیریت",
-    "products": "محصولات"
+    "products": "محصولات",
+    "store-settings": "تنظیمات فروشگاه",
+    "auctions": "حراجی ها"
   }
 }

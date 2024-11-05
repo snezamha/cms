@@ -4,6 +4,7 @@ import db from '@/server/db';
 import { CategorySchema } from '../types/category.schema';
 import { actionClient } from '@/lib/admin/safe-action';
 import { Category } from '@prisma/client';
+const t = (key: string) => key;
 
 export async function fetchCategories(): Promise<Category[]> {
   try {
@@ -16,7 +17,7 @@ export async function fetchCategories(): Promise<Category[]> {
 }
 
 export const addCategory = actionClient
-  .schema(CategorySchema)
+  .schema(CategorySchema(t))
   .action(async ({ parsedInput: { name, type, parentId } }) => {
     await db.category.create({
       data: {
@@ -30,7 +31,7 @@ export const addCategory = actionClient
   });
 
 export const updateCategory = actionClient
-  .schema(CategorySchema)
+  .schema(CategorySchema(t))
   .action(async ({ parsedInput: { id, name, type, parentId } }) => {
     await db.category.update({
       where: { id: id },

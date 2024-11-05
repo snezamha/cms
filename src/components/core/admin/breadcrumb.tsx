@@ -10,6 +10,7 @@ import {
 // import { Icon } from '@/components/ui/icon';
 import { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
+import { Slash } from 'lucide-react';
 
 const DashboardBreadcrumb = ({ children }: { children?: ReactNode }) => {
   const location = usePathname();
@@ -35,7 +36,11 @@ const DashboardBreadcrumb = ({ children }: { children?: ReactNode }) => {
                           {scopedT('adminDashboard')}
                         </Link>
                       </BreadcrumbItem>
-                      {!isLast && <BreadcrumbSeparator />}
+                      {!isLast && (
+                        <BreadcrumbSeparator>
+                          <Slash className='-rotate-[20deg]' />
+                        </BreadcrumbSeparator>
+                      )}
                     </>
                   ) : (
                     <>
@@ -47,7 +52,9 @@ const DashboardBreadcrumb = ({ children }: { children?: ReactNode }) => {
                         )}
                       </BreadcrumbItem>
                       {locations.length !== index + 1 && (
-                        <BreadcrumbSeparator />
+                        <BreadcrumbSeparator>
+                          <Slash className='-rotate-[20deg]' />
+                        </BreadcrumbSeparator>
                       )}
                     </>
                   )}

@@ -25,6 +25,7 @@ const ProductsPage = async () => {
     price: formatPrice(item.price),
     name: item.name,
     category: item.category?.name || '',
+    status: item.status,
   }));
 
   return (

@@ -43,6 +43,7 @@
     "products": "Products",
     "productsList": "Products list",
     "newProduct": "New product",
+    "auctions": "Auctions",
     "settings": "Settings"
   },
   "components": {
@@ -71,7 +72,8 @@
       "news": "News",
       "categoryDeleted": "Category deleted",
       "update": "Update",
-      "delete": "Delete"
+      "delete": "Delete",
+      "categoryNameRequired": "Category name is required"
     },
     "store": {
       "products": "Products",
@@ -94,7 +96,60 @@
       "productUpdated": "Product updated",
       "saveChanges": "Save changes",
       "update": "Update",
-      "delete": "Delete"
+      "delete": "Delete",
+      "searchCategories": "Search categories",
+      "nameMin": "Name must contain at least 3 character(s)",
+      "nameMax": "Name must contain at most 50 character(s)",
+      "descriptionMax": "Description must contain at most 500 character(s)",
+      "priceRequired": "Price must be filled",
+      "nameRequired": "Name must be filled",
+      "priceMinOrZero": "Price must be zero or a positive number",
+      "countInStock": "Count in Stock",
+      "countInStockPlaceholder": "Enter stock count",
+      "discountPercent": "Discount Percent",
+      "discountPercentPlaceholder": "Enter discount percentage",
+      "isInAuction": "Is in Auction",
+      "status": "Status",
+      "countInStockPositiveOrZero": "Stock count must be zero or a positive integer",
+      "discountPercentPositive": "Discount percent must be a positive number",
+      "countInStockRequired": "Stock count is required",
+      "rial": "Rial",
+      "yes": "Yes",
+      "notYet": "Not yet",
+      "active": "Active",
+      "disabled": "Deactive"
+    },
+    "auctions": {
+      "auctionTitleRequired": "Auction title is required",
+      "productIdsRequired": "At least one product ID is required",
+      "endAtRequired": "Auction end date is required",
+      "itemName": "Item Name",
+      "endDate": "End Date",
+      "status": "Status",
+      "auctions": "Auctions",
+      "auction": "Auction",
+      "title": "title",
+      "auctionTitle": "Auction title",
+      "addNew": "Add new",
+      "addAuction": "Add auction",
+      "open": "Open",
+      "closed": "Closed",
+      "create": "Create",
+      "cancel": "Cancle",
+      "createAuction": "Create Auction",
+      "updateAuction": "Update Auction",
+      "deleteAuction": "Delete Auction",
+      "auctionCreated": "Auction created successfully",
+      "auctionUpdated": "Auction updated successfully",
+      "auctionDeleted": "Auction deleted successfully",
+      "selectProducts": "Select products",
+      "editAuction": "Edit auction",
+      "saveChanges": "Save changes",
+      "countOfProducts": "Count of products",
+      "update": "Update",
+      "delete": "Delete",
+      "searchProduct": "search Product",
+      "noOptionFound": "No option found"
     }
   },
   "deleteConfirmationDialog": {
@@ -116,6 +171,8 @@
     "update": "Update",
     "categories": "Categories",
     "adminDashboard": "Admin dashboard",
-    "products": "Products"
+    "products": "Products",
+    "store-settings": "Store settings",
+    "auctions": "Auctions"
   }
 }

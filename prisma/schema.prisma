@@ -32,21 +32,31 @@ model Category {
   updatedAt DateTime   @updatedAt
   parent    Category?  @relation("CategoryToCategory", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   children  Category[] @relation("CategoryToCategory")
-  Product   Product[]
+  products  Product[]
 }
 
 model Product {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  slug        String?
-  description String?   @db.String
-  price       String    @db.String
-  categoryId  String?   @db.ObjectId
-  category    Category? @relation(fields: [categoryId], references: [id])
-  images      Json?
-  status      Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  slug            String?
+  description     String?
+  price           String
+  categoryId      String?   @db.ObjectId
+  category        Category? @relation(fields: [categoryId], references: [id])
+  images          Json?
+  countInStock    String
+  discountPercent String
+  isInAuction     Boolean
+  auctionEndAt    DateTime?
+  status          Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
 
-  @@index([name])
+model Auction {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  productIds String[] @db.ObjectId
+  endAt      DateTime
+  status     Boolean  @default(false)
 }
