@@ -1,4 +1,22 @@
 {
+  "Front": {
+    "Hero": {
+      "textOne": "Haraj Center, an online sales system using the auction method",
+      "textTwo": "As the first online platform in Iran utilizing the auction method, we bring you a unique and innovative online shopping experience. Our goal is to create a secure, transparent, and exciting environment for buyers.",
+      "buyNow": "‌Buy now",
+      "bidNow": "Bid now"
+    },
+    "LatestProducts": {
+      "latestProducts": "Latest Products",
+      "textTwo": "Discover our latest products and find something you love!",
+      "shopTheCollection": "Shop the Collection",
+      "viewAllProducts": "View All Products"
+    },
+    "Products": {
+      "noImageAvailable": "No image available",
+      "rial": "Rial"
+    }
+  },
   "Core": {
     "loadingText": "Loading ..."
   },
